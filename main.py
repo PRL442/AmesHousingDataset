@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-# -*-coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
-Created on Fri Feb 28 13:01:53 2025
-©author: emilypinson
+Created on Fri Feb 28 17:46:46 2025
+
+@author: emilypinson
 """
+
 # Load libraries
 import streamlit as st
 import pandas as pd
