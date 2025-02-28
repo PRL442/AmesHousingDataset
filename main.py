@@ -15,7 +15,7 @@ from sklearn.metrics import mean_squared_error
 
 # Define the file name manually
 file_name = "AmesHousing.xlsx"  # Set your filename here
-st.write(f"Using file: {AmesHousing.xlsx}")
+st.write(f"Using file: {'AmesHousing.xlsx'}")
 
 # Read the dataset from the Excel file
 df = pd.read_excel(file_name, sheet_name='AmesHousing')  # Load first sheet
