@@ -16,11 +16,10 @@ import openpyxl
 import xlrd
 
 # Define the file name manually
-Ames_Housing = "AmesHousing.xlsx"  # Set your filename here
-st.write(f"Using file: {Ames_Housing}")
+file_path = 'AmesHousing.xlsx'
 
 # Read the dataset from the Excel file
-df = pd.read_excel(Ames_Housing, sheet_name='AmesHousing')  # Load first sheet
+df = pd.read_excel(file_path, sheet_name=0)  # Load first sheet
 
 # Clean column names
 df.columns = [col.split('(')[0].strip() for col in df.columns]
