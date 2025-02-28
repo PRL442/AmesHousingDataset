@@ -18,7 +18,7 @@ file_name = "AmesHousing.xlsx"  # Set your filename here
 st.write(f"Using file: {'AmesHousing.xlsx'}")
 
 # Read the dataset from the Excel file
-df = pd.read_excel(file_name, sheet_name='AmesHousing')  # Load first sheet
+df = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
 
 # Clean column names
 df.columns = [col.split('(')[0].strip() for col in df.columns]
