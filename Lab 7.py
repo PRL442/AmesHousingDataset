@@ -1,39 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb 27 15:56:10 2025
-
-@author: emilypinson
-"""
-
 # Load libraries
 import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-import openpyxl
-import xlrd
 
-# Define the file name manuallly
-file_name = "AmesHousing.xlsx" # Set your filename here
-print(f"Using file: {file_name}")
+# Define the file name manually
+file_name = "AmesHousing.xlsx"  # Set your filename here
+st.write(f"Using file: {file_name}")
 
-# Read the dataset from the local file in the GitHub repository
-df = pd.read_excel('AmesHousing.xlsx')
-
-# Load the Excel file
-data = pd.read_excel(file_name, sheet_name=0) # Load first sheet
+# Read the dataset from the Excel file
+df = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
 
 # Clean column names
-data.columns = [col.split('(')[0].strip() for col in data.columns]
-data.rename(columns={'SalePrice': 'Sale Price'}, inplace=True)
+df.columns = [col.split('(')[0].strip() for col in df.columns]
+df.rename(columns={'SalePrice': 'Sale Price'}, inplace=True)
 
-# Assuming no missing values, split the data into features and target
-X = data.drop(columns=['Sale Price'])
-y = data['Sale Price']
+# Handle missing values (fill or drop depending on the situation)
+df.fillna(df.mean(), inplace=True)
 
-# Train a Multiple Regression Model 
+# Split the data into features and target
+X = df.drop(columns=['Sale Price'])
+y = df['Sale Price']
+
+# Train a Multiple Regression Model
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -47,8 +40,9 @@ y_pred = model.predict(X_test)
 
 # Evaluate the model
 mse = mean_squared_error(y_test, y_pred)
+st.write(f"Mean Squared Error (MSE) of the model: {mse}")
 
-# Create the streamlit web-based app
+# Create the Streamlit web-based app
 
 # Title of the app
 st.title('Ames Housing Dataset Predictions')
@@ -83,6 +77,6 @@ st.write(input_df)
 # Predict the housing price
 prediction = model.predict(input_df)
 
-# Display the prediction
-st.subheader('Sale Price Predictor (dollars)')
-st.write(prediction[0])
+# Display the prediction (formatted as currency)
+st.subheader('Sale Price Prediction (in dollars)')
+st.write(f"${prediction[0]:,.2f}")
