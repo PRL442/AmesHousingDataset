@@ -17,10 +17,10 @@ import xlrd
 
 # Define the file name manually
 Ames_Housing = "AmesHousing.xlsx"  # Set your filename here
-st.write(f"Using file: {'Ames_Housing'}")
+st.write(f"Using file: {Ames_Housing}")
 
 # Read the dataset from the Excel file
-df = pd.read_excel('Ames_Housing', sheet_name=0,)  # Load first sheet
+df = pd.read_excel(Ames_Housing, sheet_name=0)  # Load first sheet
 
 # Clean column names
 df.columns = [col.split('(')[0].strip() for col in df.columns]
