@@ -15,10 +15,10 @@ from sklearn.metrics import mean_squared_error
 
 # Define the file name manually
 file_name = "AmesHousing.xlsx"  # Set your filename here
-st.write(f"Using file: {'AmesHousing.xlsx'})
+st.write(f"Using file: {'AmesHousing'})
 
 # Read the dataset from the Excel file
-df = pd.read_excel('AmesHousing.xlsx', sheet_name='AmesHousing')  # Load first sheet
+df = pd.read_excel('AmesHousing', sheet_name='AmesHousing')  # Load first sheet
 
 # Clean column names
 df.columns = [col.split('(')[0].strip() for col in df.columns]
