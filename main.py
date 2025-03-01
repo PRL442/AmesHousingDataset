@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*-coding: utf-8 -*-
 """
-Created on Fri Feb 28 17:46:46 2025
-
-@author: emilypinson
+Created on Fri Feb 28 13:01:53 2025
+©author: emilypinson
 """
-
 # Load libraries
 import streamlit as st
 import pandas as pd
@@ -16,10 +14,11 @@ import openpyxl
 import xlrd
 
 # Define the file name manually
-file_path = 'AmesHousing.xlsx'
+file_name = "AmesHousing.xlsx"  # Set your filename here
+st.write(f"Using file: {file_name}")
 
 # Read the dataset from the Excel file
-df = pd.read_excel(file_path, sheet_name=0)  # Load first sheet
+df = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
 
 # Clean column names
 df.columns = [col.split('(')[0].strip() for col in df.columns]
