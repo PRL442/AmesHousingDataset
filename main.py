@@ -18,15 +18,26 @@ file_name = "AmesHousing.xlsx"  # Set your filename here
 st.write(f"Using file: {file_name}")
 
 # Read the dataset from the Excel file
-data = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
+df = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
 
 # Clean column names
-data.columns = [col.split('(')[0].strip() for col in data.columns]
-data.rename(columns={'SalePrice': 'Sale Price'}, inplace=True)
+df.columns = [col.split('(')[0].strip() for col in df.columns]
+df.rename(columns={'SalePrice': 'Sale Price'}, inplace=True)
+
+# Separate numeric and categorical columns
+numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
+categorical_cols = df.select_dtypes(include=['object']).columns
+
+# Handle missing values
+df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())  # Fill numeric with mean
+df[categorical_cols] = df[categorical_cols].fillna(df[categorical_cols].mode().iloc[0])  # Fill categorical with mode
+
+# Encode categorical variables (one-hot encoding)
+df_encoded = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
 
 # Split the data into features and target
-X = data.drop(columns=['Sale Price'])
-y = data['Sale Price']
+X = df_encoded.drop(columns=['Sale Price'])
+y = df_encoded['Sale Price']
 
 # Train a Multiple Regression Model
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -54,7 +65,6 @@ def user_input_features():
     Overall_Cond = st.sidebar.slider('Overall Condition', 1, 10, 5)
     Year_Built = st.sidebar.slider('Year Built', 1872, 2010, 1999)
     Total_Bsmt_SF = st.sidebar.slider('Total Basement SF', 0, 6110, 2500)
-   
     data = {
         'Lot Area': Lot_Area,
         'Overall Qual': Overall_Qual,
@@ -78,7 +88,7 @@ full_input_df[numeric_cols_X] = X[numeric_cols_X].mean()
 # Update with user-provided values (ensure column names match)
 for col in input_df.columns:
     if col in full_input_df.columns:
-        full_input_df[col] = input_data[col]
+        full_input_df[col] = input_df[col]
 
 # Ensure all data is numeric
 full_input_df = full_input_df.astype(float)
