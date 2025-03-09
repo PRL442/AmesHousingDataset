@@ -62,16 +62,16 @@ st.title('Ames Housing Dataset Predictions')
 st.sidebar.header('Input Parameters')
 
 def user_input_features():
-    Lot_Area = st.sidebar.slider('Lot Area', 1300, 215245, 2000)
+    Lot_Frontage = st.sidebar.slider('Lot Frontage', 20, 320, 50)
+    Lot_Area = st.sidebar.slider('Lot Area', 1300, 220000, 2000)
     Overall_Qual = st.sidebar.slider('Overall Quality', 1, 10, 5)
     Overall_Cond = st.sidebar.slider('Overall Condition', 1, 10, 5)
-    Year_Built = st.sidebar.slider('Year Built', 1872, 2010, 1999)
     Total_Bsmt_SF = st.sidebar.slider('Total Basement SF', 0, 6110, 2500)
     data = {
+        'Lot Frontage': Lot_Frontage,
         'Lot Area': Lot_Area,
         'Overall Qual': Overall_Qual,
         'Overall Cond': Overall_Cond,
-        'Year Built': Year_Built,
         'Total Bsmt SF': Total_Bsmt_SF,
     }
     features = pd.DataFrame(data, index=[0])
