@@ -21,7 +21,7 @@ st.write(f"Using file: {file_name}")
 data = pd.read_excel(file_name, sheet_name=0)  # Load first sheet
 
 # Clean column names
-data.columns = [col.split('(')[0].strip() for col in df.columns]
+data.columns = [col.split('(')[0].strip() for col in data.columns]
 data.rename(columns={'SalePrice': 'Sale Price'}, inplace=True)
 
 # Split the data into features and target
