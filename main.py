@@ -102,6 +102,9 @@ st.write(input_df)
 # Predict the housing price
 prediction = model.predict(full_input_df)
 
+# Clipping negative predictions to zero (or to a minimum reasonable value)
+prediction = max(0, prediction[0])
+
 # Display the prediction (formatted as currency)
 st.subheader('Sale Price Prediction (in dollars)')
 st.write(f"${prediction[0]:,.2f}")
