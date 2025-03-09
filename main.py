@@ -72,7 +72,7 @@ full_input_df = pd.DataFrame(columns=X.columns)
 full_input_df.loc[0] = 0  # Initialize with zeros
 
 # Fill numeric columns with means from training data
-numeric_cols_X = X.select_dtypes(include=['int64', 'float64']).columns
+numeric_cols_X = X.select_dtypes(include=['int64', 'float64', 'bool']).columns
 full_input_df[numeric_cols_X] = X[numeric_cols_X].mean()
 
 # Update with user-provided values (ensure column names match)
